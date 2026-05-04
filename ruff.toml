@@ -1,0 +1,17 @@
+target-version = "py312"
+line-length = 100
+
+[lint]
+select = ["E", "F", "W", "I", "UP"]
+ignore = [
+    "E501",   # line too long — handled by formatter
+    "UP007",  # X | Y union syntax (prefer explicit for clarity)
+]
+
+[lint.per-file-ignores]
+"tests/*" = ["F811"]   # redefined-while-unused (fixtures reuse names)
+"ml/*"    = ["E402"]   # module-level imports not at top (notebook-style)
+
+[format]
+quote-style = "double"
+indent-style = "space"

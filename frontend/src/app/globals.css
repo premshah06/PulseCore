@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+/* ── Theme tokens ─────────────────────────────────────────────────── */
+@theme {
+  --color-bg:        #020817;
+  --color-surface:   rgba(255,255,255,0.03);
+  --color-border:    rgba(255,255,255,0.08);
+  --color-muted:     #334155;
+  --font-sans:       "Inter", system-ui, sans-serif;
+}
+
+/* ── Base reset ───────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #020817;
+  color: #e2e8f0;
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────── */
+::-webkit-scrollbar            { width: 4px; }
+::-webkit-scrollbar-track      { background: transparent; }
+::-webkit-scrollbar-thumb      { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+/* ── Custom utilities ─────────────────────────────────────────────── */
+@layer utilities {
+  .glass {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 1.25rem;
+  }
+
+  .glass-strong {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 1.25rem;
+  }
+
+  /* Animated mesh grid background */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Glow effect used on high-score badges */
+  .glow-red   { box-shadow: 0 0 20px rgba(239,68,68,0.3); }
+  .glow-amber { box-shadow: 0 0 20px rgba(245,158,11,0.25); }
+  .glow-violet{ box-shadow: 0 0 30px rgba(139,92,246,0.35); }
+
+  /* Text gradient */
+  .gradient-text {
+    background: linear-gradient(135deg, #a78bfa 0%, #818cf8 50%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* ── Ambient orb animations ───────────────────────────────────────── */
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
+  pointer-events: none;
+  animation: orb-float 20s ease-in-out infinite alternate;
+}
+.orb-delay { animation-delay: -10s; }
+
+@keyframes orb-float {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  50%  { transform: translate(30px, -20px) scale(1.05); }
+  100% { transform: translate(-20px, 30px) scale(0.97); }
+}
+
+/* ── Pulse dot for live indicator ─────────────────────────────────── */
+.pulse-dot {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { opacity: 1;   transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ── Score bar fill animation ─────────────────────────────────────── */
+@keyframes fill-bar {
+  from { width: 0%; }
+}

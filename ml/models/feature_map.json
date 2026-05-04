@@ -1,0 +1,125 @@
+{
+  "version": "1.0",
+  "description": "Canonical input tensor specification for PulseCore anomaly models. Phase 4 must extract StreamEvent.metrics in the exact column order specified by domains.<domain>.features.",
+  "domains": {
+    "infra": {
+      "features": [
+        "cpu_idle_pct",
+        "cpu_system_pct",
+        "cpu_user_pct",
+        "disk_read_mb_s",
+        "disk_used_pct",
+        "disk_write_mb_s",
+        "load_avg_1m",
+        "mem_available_mb",
+        "mem_used_pct",
+        "net_rx_mb_s",
+        "net_tx_mb_s"
+      ],
+      "n_features": 11,
+      "model_file": "vigil_anomaly_infra.onnx",
+      "input_name": "float_input",
+      "input_dtype": "float32",
+      "input_shape": [
+        null,
+        11
+      ],
+      "outputs": [
+        {
+          "name": "label",
+          "type": "tensor(int64)",
+          "shape": [
+            null,
+            1
+          ]
+        },
+        {
+          "name": "scores",
+          "type": "tensor(float)",
+          "shape": [
+            null,
+            1
+          ]
+        }
+      ]
+    },
+    "ecommerce": {
+      "features": [
+        "add_to_cart_count",
+        "avg_order_value_usd",
+        "bounce_rate",
+        "cart_abandonment_rate",
+        "checkout_count",
+        "conversion_rate",
+        "orders_count",
+        "page_views",
+        "revenue_usd",
+        "sessions"
+      ],
+      "n_features": 10,
+      "model_file": "vigil_anomaly_ecommerce.onnx",
+      "input_name": "float_input",
+      "input_dtype": "float32",
+      "input_shape": [
+        null,
+        10
+      ],
+      "outputs": [
+        {
+          "name": "label",
+          "type": "tensor(int64)",
+          "shape": [
+            null,
+            1
+          ]
+        },
+        {
+          "name": "scores",
+          "type": "tensor(float)",
+          "shape": [
+            null,
+            1
+          ]
+        }
+      ]
+    },
+    "iot": {
+      "features": [
+        "battery_pct",
+        "error_count",
+        "humidity_pct",
+        "pressure_hpa",
+        "signal_rssi_dbm",
+        "temperature_celsius",
+        "uptime_seconds",
+        "voltage_v"
+      ],
+      "n_features": 8,
+      "model_file": "vigil_anomaly_iot.onnx",
+      "input_name": "float_input",
+      "input_dtype": "float32",
+      "input_shape": [
+        null,
+        8
+      ],
+      "outputs": [
+        {
+          "name": "label",
+          "type": "tensor(int64)",
+          "shape": [
+            null,
+            1
+          ]
+        },
+        {
+          "name": "scores",
+          "type": "tensor(float)",
+          "shape": [
+            null,
+            1
+          ]
+        }
+      ]
+    }
+  }
+}
