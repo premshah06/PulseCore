@@ -76,7 +76,7 @@ def model_dir(tmp_path_factory):
 @pytest.fixture(scope="module")
 def real_predictor(model_dir):
     return Predictor(
-        model_path=model_dir / "vigil_anomaly_infra.onnx",
+        model_path=model_dir / "pulsecore_anomaly_infra.onnx",
         feature_map_path=model_dir / "feature_map.json",
     )
 
@@ -261,7 +261,7 @@ class TestPredictorInit:
     def test_missing_feature_map_raises_runtime_error(self, tmp_path, model_dir):
         with pytest.raises(RuntimeError, match="feature_map.json not found"):
             Predictor(
-                model_path=model_dir / "vigil_anomaly_infra.onnx",
+                model_path=model_dir / "pulsecore_anomaly_infra.onnx",
                 feature_map_path=tmp_path / "nonexistent.json",
             )
 

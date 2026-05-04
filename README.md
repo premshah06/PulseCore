@@ -1,4 +1,4 @@
-# Vigil — Real-Time Streaming Anomaly Detection Platform
+# PulseCore — Real-Time Streaming Anomaly Detection Platform
 
 End-to-end pipeline that ingests synthetic telemetry from three business domains, scores each event against a domain-specific IsolationForest model exported to ONNX, and streams results to a live Next.js dashboard — all in under 200 ms from event emit to screen render.
 
@@ -237,7 +237,7 @@ pulsecore/
 │       └── types/      # TypeScript interfaces mirroring API contracts
 ├── schema/            # MongoDB init script (collections + indexes + TTL)
 ├── tests/             # 18 test files, 479 tests, 92% coverage
-├── ml/models/         # vigil_anomaly_{domain}.onnx + feature_map.json
+├── ml/models/         # pulsecore_anomaly_{domain}.onnx + feature_map.json
 ├── docker-compose.yml # Full 12-service stack
 ├── Makefile           # up / down / test / lint / build
 └── CONTRACTS.md       # Inter-service schema reference

@@ -1,12 +1,12 @@
 """PulseCore Inference Sidecar — FastAPI application.
 
 Environment variables:
-  ONNX_MODEL_PATH  path to vigil_anomaly_{domain}.onnx  (required)
+  ONNX_MODEL_PATH  path to pulsecore_anomaly_{domain}.onnx  (required)
   FEATURE_MAP_PATH path to feature_map.json              (default: same dir as model)
   INFERENCE_PORT   TCP port to bind                      (default: 8001)
 
 Start with:
-  ONNX_MODEL_PATH=ml/models/vigil_anomaly_infra.onnx \
+  ONNX_MODEL_PATH=ml/models/pulsecore_anomaly_infra.onnx \
   uvicorn inference.main:app --host 0.0.0.0 --port 8001
 """
 
@@ -35,7 +35,7 @@ async def lifespan(app: FastAPI):
     global _predictor
 
     model_path = Path(
-        os.environ.get("ONNX_MODEL_PATH", "ml/models/vigil_anomaly_infra.onnx")
+        os.environ.get("ONNX_MODEL_PATH", "ml/models/pulsecore_anomaly_infra.onnx")
     )
     feature_map_path = Path(
         os.environ.get(

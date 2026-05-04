@@ -81,21 +81,21 @@ class TestRunInference:
     @pytest.mark.parametrize("domain", ["infra", "ecommerce", "iot"])
     def test_returns_int64_array(self, model_dir, domain):
         X, _ = generate_training_data(domain, n_samples=10, seed=0)
-        onnx_path = model_dir / f"vigil_anomaly_{domain}.onnx"
+        onnx_path = model_dir / f"pulsecore_anomaly_{domain}.onnx"
         labels = run_inference(onnx_path, X)
         assert labels.dtype == np.int64
 
     @pytest.mark.parametrize("domain", ["infra", "ecommerce", "iot"])
     def test_labels_are_1_or_minus1(self, model_dir, domain):
         X, _ = generate_training_data(domain, n_samples=20, seed=2)
-        onnx_path = model_dir / f"vigil_anomaly_{domain}.onnx"
+        onnx_path = model_dir / f"pulsecore_anomaly_{domain}.onnx"
         labels = run_inference(onnx_path, X)
         assert set(labels.tolist()).issubset({-1, 1})
 
     @pytest.mark.parametrize("domain", ["infra", "ecommerce", "iot"])
     def test_output_length_equals_input_rows(self, model_dir, domain):
         X, _ = generate_training_data(domain, n_samples=13, seed=3)
-        onnx_path = model_dir / f"vigil_anomaly_{domain}.onnx"
+        onnx_path = model_dir / f"pulsecore_anomaly_{domain}.onnx"
         labels = run_inference(onnx_path, X)
         assert len(labels) == 13
 

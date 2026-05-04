@@ -1,7 +1,7 @@
 """ONNX model wrapper: load once at startup, run inference per request.
 
 Env vars (consumed by main.py, passed to Predictor.__init__):
-  ONNX_MODEL_PATH   path to vigil_anomaly_{domain}.onnx
+  ONNX_MODEL_PATH   path to pulsecore_anomaly_{domain}.onnx
   FEATURE_MAP_PATH  path to feature_map.json  (default: same dir as model)
 """
 
@@ -57,8 +57,8 @@ class Predictor:
 
         feature_map = json.loads(feature_map_path.read_text())
 
-        # Infer domain from model filename: vigil_anomaly_{domain}.onnx
-        self._domain = model_path.stem.replace("vigil_anomaly_", "")
+        # Infer domain from model filename: pulsecore_anomaly_{domain}.onnx
+        self._domain = model_path.stem.replace("pulsecore_anomaly_", "")
         domain_config = feature_map["domains"].get(self._domain)
         if domain_config is None:
             raise RuntimeError(

@@ -62,7 +62,7 @@ class TestExportToOnnx:
 
     @pytest.mark.parametrize("domain", ["infra", "ecommerce", "iot"])
     def test_inference_runs_without_error(self, trained_dir, domain):
-        onnx_path = trained_dir / f"vigil_anomaly_{domain}.onnx"
+        onnx_path = trained_dir / f"pulsecore_anomaly_{domain}.onnx"
         X, _ = generate_training_data(domain, n_samples=10, seed=0)
         sess = rt.InferenceSession(str(onnx_path))
         outputs = sess.run(None, {sess.get_inputs()[0].name: X.astype(np.float32)})
@@ -70,7 +70,7 @@ class TestExportToOnnx:
 
     @pytest.mark.parametrize("domain", ["infra", "ecommerce", "iot"])
     def test_label_output_values_are_1_or_minus1(self, trained_dir, domain):
-        onnx_path = trained_dir / f"vigil_anomaly_{domain}.onnx"
+        onnx_path = trained_dir / f"pulsecore_anomaly_{domain}.onnx"
         X, _ = generate_training_data(domain, n_samples=30, seed=1)
         sess = rt.InferenceSession(str(onnx_path))
         outputs = sess.run(None, {sess.get_inputs()[0].name: X.astype(np.float32)})
@@ -79,7 +79,7 @@ class TestExportToOnnx:
 
     @pytest.mark.parametrize("domain", ["infra", "ecommerce", "iot"])
     def test_input_shape_matches_n_features(self, trained_dir, domain):
-        onnx_path = trained_dir / f"vigil_anomaly_{domain}.onnx"
+        onnx_path = trained_dir / f"pulsecore_anomaly_{domain}.onnx"
         sess = rt.InferenceSession(str(onnx_path))
         # shape[1] must equal n_features
         input_shape = sess.get_inputs()[0].shape
@@ -90,14 +90,14 @@ class TestExportToOnnx:
 
     @pytest.mark.parametrize("domain", ["infra", "ecommerce", "iot"])
     def test_label_count_equals_batch_size(self, trained_dir, domain):
-        onnx_path = trained_dir / f"vigil_anomaly_{domain}.onnx"
+        onnx_path = trained_dir / f"pulsecore_anomaly_{domain}.onnx"
         X, _ = generate_training_data(domain, n_samples=7, seed=2)
         sess = rt.InferenceSession(str(onnx_path))
         outputs = sess.run(None, {sess.get_inputs()[0].name: X.astype(np.float32)})
         assert len(np.array(outputs[0]).flatten()) == 7
 
     def test_input_shape_mismatch_raises(self, trained_dir):
-        onnx_path = trained_dir / "vigil_anomaly_infra.onnx"
+        onnx_path = trained_dir / "pulsecore_anomaly_infra.onnx"
         expected_n = len(get_feature_names("infra"))
         X_bad = np.zeros((3, expected_n + 5), dtype=np.float32)
         sess = rt.InferenceSession(str(onnx_path))
@@ -138,7 +138,7 @@ class TestBuildFeatureMap:
         for domain in ("infra", "ecommerce", "iot"):
             path = build_feature_map({domain: ["x"]}, tmp_path)
             data = json.loads(path.read_text())
-            assert data["domains"][domain]["model_file"] == f"vigil_anomaly_{domain}.onnx"
+            assert data["domains"][domain]["model_file"] == f"pulsecore_anomaly_{domain}.onnx"
 
     def test_input_shape_has_correct_n(self, tmp_path):
         path = build_feature_map({"infra": ["a", "b", "c"]}, tmp_path)
@@ -166,7 +166,7 @@ class TestBuildFeatureMap:
 class TestExportAll:
     def test_creates_all_onnx_files(self, trained_dir):
         for domain in ("infra", "ecommerce", "iot"):
-            assert (trained_dir / f"vigil_anomaly_{domain}.onnx").exists()
+            assert (trained_dir / f"pulsecore_anomaly_{domain}.onnx").exists()
 
     def test_creates_feature_map_json(self, trained_dir):
         assert (trained_dir / "feature_map.json").exists()

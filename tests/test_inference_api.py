@@ -27,7 +27,7 @@ def model_dir(tmp_path_factory):
 @pytest.fixture
 def client(model_dir, monkeypatch):
     """TestClient that lets lifespan run normally against a real model."""
-    monkeypatch.setenv("ONNX_MODEL_PATH", str(model_dir / "vigil_anomaly_infra.onnx"))
+    monkeypatch.setenv("ONNX_MODEL_PATH", str(model_dir / "pulsecore_anomaly_infra.onnx"))
     monkeypatch.setenv("FEATURE_MAP_PATH", str(model_dir / "feature_map.json"))
     with TestClient(app, raise_server_exceptions=True) as c:
         yield c
@@ -36,7 +36,7 @@ def client(model_dir, monkeypatch):
 @pytest.fixture
 def client_no_model(model_dir, monkeypatch):
     """TestClient where predictor is cleared after startup — simulates missing model."""
-    monkeypatch.setenv("ONNX_MODEL_PATH", str(model_dir / "vigil_anomaly_infra.onnx"))
+    monkeypatch.setenv("ONNX_MODEL_PATH", str(model_dir / "pulsecore_anomaly_infra.onnx"))
     monkeypatch.setenv("FEATURE_MAP_PATH", str(model_dir / "feature_map.json"))
     with TestClient(app, raise_server_exceptions=True) as c:
         _main_module._predictor = None  # clear after successful startup

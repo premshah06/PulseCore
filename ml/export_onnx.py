@@ -4,7 +4,7 @@ Environment variables:
   MODEL_DIR - directory containing isolation_forest_{domain}.pkl files (default: ml/models)
 
 Output files (all under MODEL_DIR):
-  vigil_anomaly_{domain}.onnx   - one per domain
+  pulsecore_anomaly_{domain}.onnx   - one per domain
   feature_map.json              - Phase 4 input tensor contract
 """
 
@@ -44,7 +44,7 @@ def export_to_onnx(
         target_opset={"": 17, "ai.onnx.ml": 3},
     )
 
-    onnx_path = output_dir / f"vigil_anomaly_{domain}.onnx"
+    onnx_path = output_dir / f"pulsecore_anomaly_{domain}.onnx"
     onnx_path.write_bytes(onnx_model.SerializeToString())
     logger.info("Exported ONNX for domain=%s (%d features) → %s", domain, n_features, onnx_path)
     return onnx_path
@@ -78,13 +78,13 @@ def build_feature_map(
     """
     domains_section = {}
     for domain, features in domain_features.items():
-        onnx_path = output_dir / f"vigil_anomaly_{domain}.onnx"
+        onnx_path = output_dir / f"pulsecore_anomaly_{domain}.onnx"
         raw_outputs = _introspect_outputs(onnx_path) if onnx_path.exists() else []
 
         domains_section[domain] = {
             "features": features,
             "n_features": len(features),
-            "model_file": f"vigil_anomaly_{domain}.onnx",
+            "model_file": f"pulsecore_anomaly_{domain}.onnx",
             "input_name": "float_input",
             "input_dtype": "float32",
             "input_shape": [None, len(features)],

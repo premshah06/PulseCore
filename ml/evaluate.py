@@ -87,7 +87,7 @@ def evaluate_domain(
     X_normal, _ = generate_training_data(domain, n_holdout, seed=seed)
     X, y_true = inject_anomalies(X_normal, anomaly_rate=anomaly_rate, seed=seed)
 
-    onnx_path = model_dir / f"vigil_anomaly_{domain}.onnx"
+    onnx_path = model_dir / f"pulsecore_anomaly_{domain}.onnx"
     if not onnx_path.exists():
         raise FileNotFoundError(
             f"{onnx_path} not found. Run ml/train.py then ml/export_onnx.py first."

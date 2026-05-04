@@ -174,7 +174,7 @@ services:
     ports:
       - "${INFERENCE_INFRA_PORT:-8001}:8001"
     environment:
-      ONNX_MODEL_PATH: ml/models/vigil_anomaly_infra.onnx
+      ONNX_MODEL_PATH: ml/models/pulsecore_anomaly_infra.onnx
       FEATURE_MAP_PATH: ml/models/feature_map.json
       INFERENCE_PORT: "8001"
     volumes:
@@ -195,7 +195,7 @@ services:
     ports:
       - "${INFERENCE_ECOMMERCE_PORT:-8002}:8001"
     environment:
-      ONNX_MODEL_PATH: ml/models/vigil_anomaly_ecommerce.onnx
+      ONNX_MODEL_PATH: ml/models/pulsecore_anomaly_ecommerce.onnx
       FEATURE_MAP_PATH: ml/models/feature_map.json
       INFERENCE_PORT: "8001"
     volumes:
@@ -216,7 +216,7 @@ services:
     ports:
       - "${INFERENCE_IOT_PORT:-8003}:8001"
     environment:
-      ONNX_MODEL_PATH: ml/models/vigil_anomaly_iot.onnx
+      ONNX_MODEL_PATH: ml/models/pulsecore_anomaly_iot.onnx
       FEATURE_MAP_PATH: ml/models/feature_map.json
       INFERENCE_PORT: "8001"
     volumes:

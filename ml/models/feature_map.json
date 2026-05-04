@@ -17,7 +17,7 @@
         "net_tx_mb_s"
       ],
       "n_features": 11,
-      "model_file": "vigil_anomaly_infra.onnx",
+      "model_file": "pulsecore_anomaly_infra.onnx",
       "input_name": "float_input",
       "input_dtype": "float32",
       "input_shape": [
@@ -57,7 +57,7 @@
         "sessions"
       ],
       "n_features": 10,
-      "model_file": "vigil_anomaly_ecommerce.onnx",
+      "model_file": "pulsecore_anomaly_ecommerce.onnx",
       "input_name": "float_input",
       "input_dtype": "float32",
       "input_shape": [
@@ -95,7 +95,7 @@
         "voltage_v"
       ],
       "n_features": 8,
-      "model_file": "vigil_anomaly_iot.onnx",
+      "model_file": "pulsecore_anomaly_iot.onnx",
       "input_name": "float_input",
       "input_dtype": "float32",
       "input_shape": [
