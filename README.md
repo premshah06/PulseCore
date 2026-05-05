@@ -242,14 +242,3 @@ pulsecore/
 ├── Makefile           # up / down / test / lint / build
 └── CONTRACTS.md       # Inter-service schema reference
 ```
-
----
-
-## Known Limitations
-
-See `BUGS.md` for the full list. Key items:
-
-- **Consumer → inference wire (Phase 9):** The consumer currently writes raw events to MongoDB but does not yet call the inference sidecars. Anomaly scoring requires either the Phase 9 integration or manual `POST /predict` → `POST /api/anomalies` calls.
-- **IsolationForest has no memory:** Gradual drift over days is invisible until it crosses the threshold in a single sample. An online learning extension (e.g., Streaming Half-Space Trees) would address this.
-- **Single Kafka broker:** The docker-compose setup runs one broker. Production requires a minimum of 3 brokers for replication factor 3 and partition leader failover.
-- **RollingAggregator is not thread-safe** (BUG-004): safe today because it runs in a single async loop; add `asyncio.Lock` before any concurrent access from a second coroutine.
